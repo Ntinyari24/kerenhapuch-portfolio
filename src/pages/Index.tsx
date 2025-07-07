@@ -1,13 +1,45 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import React, { useState } from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import Portfolio from '../components/Portfolio';
+import AdminDashboard from '../components/AdminDashboard';
+import AdminLogin from '../components/AdminLogin';
 
 const Index = () => {
+  const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(
+    localStorage.getItem('admin_authenticated') === 'true'
+  );
+
+  const handleAdminLogin = (password: string) => {
+    // Simple password check - in production, use proper authentication
+    if (password === 'admin123') {
+      setIsAdminAuthenticated(true);
+      localStorage.setItem('admin_authenticated', 'true');
+      return true;
+    }
+    return false;
+  };
+
+  const handleAdminLogout = () => {
+    setIsAdminAuthenticated(false);
+    localStorage.removeItem('admin_authenticated');
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
-    </div>
+    <Routes>
+      <Route path="/" element={<Portfolio />} />
+      <Route 
+        path="/admin" 
+        element={
+          isAdminAuthenticated ? (
+            <AdminDashboard onLogout={handleAdminLogout} />
+          ) : (
+            <AdminLogin onLogin={handleAdminLogin} />
+          )
+        } 
+      />
+      <Route path="*" element={<Navigate to="/" />} />
+    </Routes>
   );
 };
 
