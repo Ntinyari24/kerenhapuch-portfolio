@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { LogOut, Plus, Edit2, Trash2, Save, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -30,6 +29,8 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => {
       description: 'Project description',
       tags: ['Tag1'],
       githubUrl: 'https://github.com',
+      imageUrl: '',
+      websiteUrl: '',
     };
     setPortfolioData({
       ...portfolioData,
@@ -230,6 +231,43 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => {
                             className="bg-white/5 border-white/20 text-white mt-1"
                           />
                         </div>
+                        <div>
+                          <label className="text-white text-sm font-medium">Website URL (optional)</label>
+                          <Input
+                            value={project.websiteUrl || ''}
+                            onChange={(e) => updateProject(index, 'websiteUrl', e.target.value)}
+                            className="bg-white/5 border-white/20 text-white mt-1"
+                            placeholder="https://yourproject.com"
+                          />
+                        </div>
+                        <div>
+                          <label className="text-white text-sm font-medium">Project Image URL (optional)</label>
+                          <Input
+                            value={project.imageUrl || ''}
+                            onChange={(e) => updateProject(index, 'imageUrl', e.target.value)}
+                            className="bg-white/5 border-white/20 text-white mt-1"
+                            placeholder="https://example.com/image.jpg or use Unsplash format: photo-1234567890"
+                          />
+                        </div>
+                        {project.imageUrl && (
+                          <div>
+                            <label className="text-white text-sm font-medium mb-2 block">Image Preview</label>
+                            <div className="bg-white/5 border border-white/20 rounded-lg p-4">
+                              <img
+                                src={project.imageUrl.startsWith('photo-') 
+                                  ? `https://images.unsplash.com/${project.imageUrl}?w=300&h=200&fit=crop`
+                                  : project.imageUrl
+                                }
+                                alt="Project preview"
+                                className="w-full max-w-xs h-32 object-cover rounded"
+                                onError={(e) => {
+                                  const target = e.target as HTMLImageElement;
+                                  target.style.display = 'none';
+                                }}
+                              />
+                            </div>
+                          </div>
+                        )}
                       </CardContent>
                     )}
                   </Card>
