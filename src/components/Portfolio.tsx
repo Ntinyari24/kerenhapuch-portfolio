@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ExternalLink, Github, Mail, Download, ArrowDown, User, Briefcase, Calendar, Code, Database, Users, Terminal, BookOpen, GraduationCap } from 'lucide-react';
 import { getPortfolioData } from '../utils/portfolioData';
@@ -34,6 +33,14 @@ const Portfolio = () => {
       element.scrollIntoView({ behavior: 'smooth' });
     }
     setIsMenuOpen(false);
+  };
+
+  const handleProjectClick = (project: any) => {
+    // Prioritize website URL over GitHub URL
+    const url = project.websiteUrl || project.githubUrl;
+    if (url) {
+      window.open(url, '_blank');
+    }
   };
 
   return (
@@ -171,41 +178,65 @@ const Portfolio = () => {
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {portfolioData.projects.map((project, index) => (
-              <div key={index} className="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-6 hover:bg-white/10 transition-colors">
-                <div className="flex justify-between items-start mb-4">
-                  <h3 className="text-xl font-semibold text-white">{project.title}</h3>
+              <div key={index} className="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl overflow-hidden hover:bg-white/10 transition-colors">
+                {/* Project Image */}
+                {project.imageUrl && (
+                  <div 
+                    className="relative h-48 cursor-pointer group"
+                    onClick={() => handleProjectClick(project)}
+                  >
+                    <img
+                      src={project.imageUrl}
+                      alt={project.title}
+                      className="w-full h-full object-cover transition-transform group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
+                      <div className="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-lg">
+                        <span className="text-white font-medium flex items-center gap-2">
+                          {project.websiteUrl ? 'View Website' : 'View Code'}
+                          <ExternalLink size={16} />
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                
+                <div className="p-6">
+                  <div className="flex justify-between items-start mb-4">
+                    <h3 className="text-xl font-semibold text-white">{project.title}</h3>
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-purple-400 hover:text-purple-300 transition-colors"
+                    >
+                      <Github size={20} />
+                    </a>
+                  </div>
+                  
+                  <p className="text-white/70 mb-4">{project.description}</p>
+                  
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {project.tags.map((tag, tagIndex) => (
+                      <span
+                        key={tagIndex}
+                        className="bg-purple-600/20 text-purple-300 px-3 py-1 rounded-full text-sm"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  
                   <a
-                    href={project.githubUrl}
+                    href={project.websiteUrl || project.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-purple-400 hover:text-purple-300 transition-colors"
+                    className="text-purple-400 hover:text-purple-300 transition-colors flex items-center gap-2"
                   >
-                    <Github size={20} />
+                    <span>{project.websiteUrl ? 'Visit Website' : 'See More'}</span>
+                    <ExternalLink size={16} />
                   </a>
                 </div>
-                
-                <p className="text-white/70 mb-4">{project.description}</p>
-                
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.tags.map((tag, tagIndex) => (
-                    <span
-                      key={tagIndex}
-                      className="bg-purple-600/20 text-purple-300 px-3 py-1 rounded-full text-sm"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-                
-                <a
-                  href={project.githubUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-purple-400 hover:text-purple-300 transition-colors flex items-center gap-2"
-                >
-                  <span>See More</span>
-                  <ExternalLink size={16} />
-                </a>
               </div>
             ))}
           </div>
