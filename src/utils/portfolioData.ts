@@ -52,32 +52,27 @@ const defaultPortfolioData: PortfolioData = {
   },
   projects: [
     {
-      title: "EXPENSE TRACKER",
-      description: "A Python-based expense tracking app built with Flask and SQLite, integrating APIs for enhanced functionality.",
-      tags: ["Python", "Flask", "SQLite", "APIs"],
-      githubUrl: "https://github.com/Ntinyari24/expense_tracker.git",
-      imageUrl: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=500&h=300&fit=crop"
+      title: "SMART NYUKI",
+      description: "Contributed to data analysis and AI model training for a smart beehive system using sound data to monitor hive health and optimize harvesting.",
+      tags: ["AI", "Machine Learning", "IoT", "Data Analysis"],
+      githubUrl: "https://github.com/James-CodeX/smart-nyuki-react.git",
+      imageUrl: "https://res.cloudinary.com/dozb1abfn/image/upload/smart_nyuki_gczo7m.png"
+      websiteUrl: "https://smartnyuki.jhubafrica.com/" 
     },
-    {
-      title: "Simple Calculator Using Python",
-      description: "A simple Python calculator program that covers all basic operations and edge cases.",
-      tags: ["Python"],
-      githubUrl: "https://github.com/Ntinyari24/Calculator-program.git",
-      imageUrl: "https://images.unsplash.com/photo-1587145820266-a0a51d4d1f10?w=500&h=300&fit=crop"
-    },
+    
     {
       title: "SUDOKU GAME",
       description: "A Python-based Sudoku solver and generator with varying difficulty levels. It utilises pygame library and backtracking algorithm to solve the puzzle.",
       tags: ["Python", "Algorithms"],
       githubUrl: "https://github.com/Ntinyari24/SUDOKU.git",
-      imageUrl: "https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?w=500&h=300&fit=crop"
+      imageUrl: "https://res.cloudinary.com/dozb1abfn/image/upload/jnbxwwljgojsk96tkx3h.jpg"
     },
     {
       title: "ZOEZI_WEBSITE",
       description: "ZOEZI_WEBSITE is a modern, clean, and user-friendly fitness website that highlights health and wellness content. It includes JavaScript-driven animations to enhance user engagement and implements Google OAuth login to enable users to securely sign in",
       tags: ["HTML", "Bootstrap", "CSS", "JavaScript"],
-      githubUrl: "https://github.com/Ntinyari24/ZOEZI_WEBSITE.git",
-      imageUrl: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=500&h=300&fit=crop"
+      githubUrl: "https://zoezi-website.vercel.app/",
+      imageUrl: "https://res.cloudinary.com/dozb1abfn/image/upload/zoezi_web_ptrtao.png"
     },
     {
       title: "COVID-19 Analysis",
@@ -110,8 +105,17 @@ const defaultPortfolioData: PortfolioData = {
       degree: "Python Fundamentals for Beginners",
       period: "August 2024 - December 2024",
       description: "Completed a foundational course in Python programming, covering core concepts such as variables, data types, control structures (conditionals and loops), functions, basic data structures (lists, dictionaries, tuples), and error handling."
-    }
-  ],
+    },
+
+
+  {
+    institution: "NVIDIA",
+    degree: "Evaluation of LLMs",
+    period: "July 2025",
+    description: "Completed a course on evaluating Large Language Models (LLMs) to understand their capabilities and limitations in various applications."
+  }
+],
+
   interests: [
     {
       title: "FULL-STACK DEVELOPMENT",

@@ -441,16 +441,22 @@ const Portfolio = () => {
           </p>
           
           <div className="flex justify-center gap-6 mb-12">
-            {portfolioData.social.map((social, index) => (
-              <motion.div
+            {portfolioData.social.filter(social => social.url).map((social, index) => (
+              <motion.a
                 key={index}
-                className="bg-white border border-gray-200 p-4 rounded-lg hover:shadow-lg hover:border-purple-300 transition-all"
+                href={social.url}
+                target={social.platform === 'Email' ? undefined : '_blank'}
+                rel={social.platform === 'Email' ? undefined : 'noopener noreferrer'}
+                className="bg-white border border-gray-200 p-4 rounded-lg hover:shadow-lg hover:border-purple-300 transition-all flex items-center justify-center"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                aria-label={social.platform}
               >
-                {social.platform === 'LinkedIn' && <Code className="text-purple-600" size={24} />}
-                {social.platform === 'Twitter' && <Code className="text-purple-600" size={24} />}
-                {social.platform === 'GitHub' && <Github className="text-purple-600" size={24} />}
-                {social.platform === 'Email' && <Mail className="text-purple-600" size={24} />}
-              </motion.div>
+                {social.platform === 'LinkedIn' && <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 text-blue-700"><path strokeLinecap="round" strokeLinejoin="round" d="M16.5 8.25V6.75A2.25 2.25 0 0014.25 4.5h-4.5A2.25 2.25 0 007.5 6.75v10.5A2.25 2.25 0 009.75 19.5h4.5a2.25 2.25 0 002.25-2.25v-1.5m-6-7.5h.008v.008H10.5V8.25zm0 3.75v6.75m3-6.75v6.75m3-6.75v6.75" /></svg>}
+                {social.platform === 'Twitter' && <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 text-blue-400"><path strokeLinecap="round" strokeLinejoin="round" d="M8.25 19.5c7.5 0 11.625-6.214 11.625-11.625 0-.177 0-.353-.012-.53A8.348 8.348 0 0022.5 4.5a8.19 8.19 0 01-2.357.646A4.117 4.117 0 0021.9 3.1a8.224 8.224 0 01-2.605.996A4.107 4.107 0 0012 8.25c0 .32.036.634.105.934A11.654 11.654 0 013 5.1a4.106 4.106 0 001.27 5.482A4.073 4.073 0 012.8 9.5v.052a4.108 4.108 0 003.292 4.025 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.843" /></svg>}
+                {social.platform === 'GitHub' && <Github className="text-gray-800 w-6 h-6" />}
+                {social.platform === 'Email' && <Mail className="text-purple-600 w-6 h-6" />}
+              </motion.a>
             ))}
           </div>
           
