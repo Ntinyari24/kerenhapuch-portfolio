@@ -56,8 +56,8 @@ const defaultPortfolioData: PortfolioData = {
       description: "Contributed to data analysis and AI model training for a smart beehive system using sound data to monitor hive health and optimize harvesting.",
       tags: ["AI", "Machine Learning", "IoT", "Data Analysis"],
       githubUrl: "https://github.com/James-CodeX/smart-nyuki-react.git",
-      imageUrl: "https://res.cloudinary.com/dozb1abfn/image/upload/smart_nyuki_gczo7m.png"
-      websiteUrl: "https://smartnyuki.jhubafrica.com/" 
+      imageUrl: "https://res.cloudinary.com/dozb1abfn/image/upload/smart_nyuki_gczo7m.png",
+      websiteUrl: "https://smartnyuki.jhubafrica.com/"
     },
     
     {
