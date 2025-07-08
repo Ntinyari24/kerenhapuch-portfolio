@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { getPortfolioData, updatePortfolioData } from '../utils/portfolioData';
@@ -30,21 +29,27 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => {
       imageUrl: '',
       websiteUrl: '',
     };
-    setPortfolioData({
+    const newPortfolioData = {
       ...portfolioData,
       projects: [...portfolioData.projects, newProject],
-    });
+    };
+    setPortfolioData(newPortfolioData);
+    updatePortfolioData(newPortfolioData);
   };
 
   const updateProject = (index: number, field: string, value: any) => {
     const updatedProjects = [...portfolioData.projects];
     updatedProjects[index] = { ...updatedProjects[index], [field]: value };
-    setPortfolioData({ ...portfolioData, projects: updatedProjects });
+    const newPortfolioData = { ...portfolioData, projects: updatedProjects };
+    setPortfolioData(newPortfolioData);
+    updatePortfolioData(newPortfolioData);
   };
 
   const deleteProject = (index: number) => {
     const updatedProjects = portfolioData.projects.filter((_, i) => i !== index);
-    setPortfolioData({ ...portfolioData, projects: updatedProjects });
+    const newPortfolioData = { ...portfolioData, projects: updatedProjects };
+    setPortfolioData(newPortfolioData);
+    updatePortfolioData(newPortfolioData);
   };
 
   const addEducation = () => {

@@ -1,73 +1,52 @@
-# Welcome to your Lovable project
+# Keren Portfolio Admin Hub
 
-## Project info
+## Project Overview
 
-**URL**: https://lovable.dev/projects/f12cf90e-f34d-4c88-9f09-340b43e7f6db
+**Keren Portfolio** is a web-based admin dashboard for managing the content of a personal portfolio website. It allows users to easily update and organize their personal information, education, skills, projects, and tech interests through a modern, user-friendly interface.
 
-## How can I edit this code?
+## Features
 
-There are several ways of editing your application.
+- **Personal Info Management:** Edit and update your personal details.
+- **Education Manager:** Add, edit, or remove education history entries.
+- **Skills Manager:** Organize and update your technical and soft skills.
+- **Projects Manager:** Manage your portfolio projects, including descriptions and links.
+- **Interests Manager:** Define and describe your tech interests.
+- **Modern UI:** Clean, responsive design using shadcn-ui and Tailwind CSS.
 
-**Use Lovable**
+## Tech Stack
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/f12cf90e-f34d-4c88-9f09-340b43e7f6db) and start prompting.
+- **React** (with TypeScript) – UI library for building interactive interfaces
+- **Vite** – Fast build tool and development server
+- **shadcn-ui** – UI component library for React
+- **Tailwind CSS** – Utility-first CSS framework for styling
 
-Changes made via Lovable will be committed automatically to this repo.
+## Getting Started
 
-**Use your preferred IDE**
+### Prerequisites
+- Node.js & npm installed ([download here](https://nodejs.org/))
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
+### Installation & Running Locally
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+# Step 1: Clone the repository
+ git clone <YOUR_GIT_URL>
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+# Step 2: Navigate to the project directory
+ cd keren-portfolio
 
-# Step 3: Install the necessary dependencies.
-npm i
+# Step 3: Install dependencies
+ npm install
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+# Step 4: Start the development server
+ npm run dev
 ```
 
-**Edit a file directly in GitHub**
+The app will be available at the local URL provided in your terminal (usually http://localhost:5173).
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## Deployment
 
-**Use GitHub Codespaces**
+You can deploy this project using any static hosting provider that supports Vite/React apps (e.g., Vercel, Netlify).
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## License
 
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/f12cf90e-f34d-4c88-9f09-340b43e7f6db) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+This project is for personal portfolio management and is open for customization.

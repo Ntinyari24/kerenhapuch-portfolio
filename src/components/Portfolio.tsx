@@ -1,14 +1,31 @@
-
 import React, { useState, useEffect } from 'react';
-import { Menu, X, ExternalLink, Github, Mail, Download, ArrowDown, User, Briefcase, Calendar, Code, Database, Users, Terminal, BookOpen, GraduationCap } from 'lucide-react';
+import { Menu, X, ExternalLink, Github, Mail, Download, ArrowDown, User, Briefcase, Calendar, Code, Database, Users, Terminal, BookOpen, GraduationCap, Star } from 'lucide-react';
 import { getPortfolioData } from '../utils/portfolioData';
+import { motion } from 'framer-motion';
+
+const container = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15
+    }
+  }
+};
+
+const item = {
+  hidden: { opacity: 0, y: 30 },
+  show: { opacity: 1, y: 0 }
+};
 
 const Portfolio = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
   const [portfolioData, setPortfolioData] = useState(getPortfolioData());
+  const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(false);
 
   useEffect(() => {
+    setIsAdminAuthenticated(localStorage.getItem('admin_authenticated') === 'true');
     const handleScroll = () => {
       const sections = ['home', 'projects', 'skills', 'education', 'interests', 'contact'];
       const currentSection = sections.find(section => {
@@ -69,16 +86,6 @@ const Portfolio = () => {
               ))}
             </div>
 
-            {/* Admin Access */}
-            <div className="hidden md:flex items-center space-x-4">
-              <a
-                href="/admin"
-                className="text-sm text-gray-500 hover:bg-gradient-to-r hover:from-purple-600 hover:to-purple-800 hover:bg-clip-text hover:text-transparent transition-colors"
-              >
-                Admin
-              </a>
-            </div>
-
             {/* Mobile menu button */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -102,21 +109,26 @@ const Portfolio = () => {
                   {item}
                 </button>
               ))}
-              <a
-                href="/admin"
-                className="block text-gray-500 hover:bg-gradient-to-r hover:from-purple-600 hover:to-purple-800 hover:bg-clip-text hover:text-transparent transition-colors pt-2 border-t border-gray-200"
-              >
-                Admin Access
-              </a>
             </div>
           </div>
         )}
       </nav>
 
       {/* Hero Section */}
-      <section id="home" className="min-h-screen flex items-center justify-center pt-20 px-4">
+      <motion.section
+        id="home"
+        className="min-h-screen flex items-center justify-center pt-20 px-4"
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+      >
         <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
-          <div className="text-center lg:text-left">
+          <motion.div
+            className="text-center lg:text-left"
+            initial={{ opacity: 0, x: -40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
             <div className="flex items-center justify-center lg:justify-start gap-3 mb-4">
               <User className="text-purple-600" size={20} />
               <span className="text-gray-600 text-sm tracking-wider uppercase">
@@ -152,13 +164,18 @@ const Portfolio = () => {
                 <Download size={18} />
               </a>
             </div>
-          </div>
+          </motion.div>
           
-          <div className="flex justify-center">
+          <motion.div
+            className="flex justify-center"
+            initial={{ opacity: 0, x: 40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          >
             <div className="relative">
               <div className="w-80 h-80 bg-gradient-to-br from-purple-600 to-pink-600 rounded-full p-1">
                 <img
-                  src="/api/placeholder/320/320"
+                  src="https://res.cloudinary.com/dozb1abfn/image/upload/portrait_rc2sva.jpg"
                   alt="Keren Hapuch"
                   className="w-full h-full object-cover rounded-full"
                 />
@@ -167,9 +184,9 @@ const Portfolio = () => {
                 <p className="bg-gradient-to-r from-purple-600 to-purple-800 bg-clip-text text-transparent text-sm font-medium">Tech Enthusiast</p>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Projects Section */}
       <section id="projects" className="py-20 px-4 bg-gradient-to-b from-gray-50 to-white">
@@ -177,10 +194,16 @@ const Portfolio = () => {
           <h2 className="text-3xl lg:text-4xl font-bold text-center mb-16">
             <span className="bg-gradient-to-r from-purple-600 to-purple-800 bg-clip-text text-transparent">My Projects</span>
           </h2>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="flex flex-row overflow-x-auto gap-x-6 pb-4 hide-scrollbar">
             {portfolioData.projects.map((project, index) => (
-              <div key={index} className="bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-xl transition-all duration-300 hover:border-purple-300">
+              <motion.div
+                key={index}
+                className="bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-xl transition-all duration-300 hover:border-purple-300 min-w-[320px] max-w-[320px] flex-shrink-0"
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+              >
                 {/* Project Image */}
                 {project.imageUrl && (
                   <div 
@@ -202,7 +225,6 @@ const Portfolio = () => {
                     </div>
                   </div>
                 )}
-                
                 <div className="p-6">
                   <div className="flex justify-between items-start mb-4">
                     <h3 className="text-xl font-semibold bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">{project.title}</h3>
@@ -215,9 +237,7 @@ const Portfolio = () => {
                       <Github size={20} />
                     </a>
                   </div>
-                  
                   <p className="text-gray-600 mb-4">{project.description}</p>
-                  
                   <div className="flex flex-wrap gap-2 mb-4">
                     {project.tags.map((tag, tagIndex) => (
                       <span
@@ -228,7 +248,6 @@ const Portfolio = () => {
                       </span>
                     ))}
                   </div>
-                  
                   <a
                     href={project.websiteUrl || project.githubUrl}
                     target="_blank"
@@ -239,7 +258,7 @@ const Portfolio = () => {
                     <ExternalLink size={16} />
                   </a>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -251,20 +270,52 @@ const Portfolio = () => {
           <h2 className="text-3xl lg:text-4xl font-bold text-center mb-16">
             <span className="bg-gradient-to-r from-purple-600 to-purple-800 bg-clip-text text-transparent">My Tech Stack</span>
           </h2>
-          
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 mb-16">
+          <motion.div
+            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 mb-16"
+            variants={{
+              hidden: {},
+              show: {
+                transition: { staggerChildren: 0.12 }
+              }
+            }}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+          >
             {portfolioData.skills.languages.map((skill, index) => (
-              <div key={index} className="text-center">
+              <motion.div
+                key={index}
+                className="text-center"
+                variants={{
+                  hidden: { opacity: 0, y: 30 },
+                  show: { opacity: 1, y: 0 }
+                }}
+                transition={{ duration: 0.5, delay: index * 0.05 }}
+              >
                 <div className="bg-gradient-to-br from-purple-50 to-white border border-purple-200 rounded-xl p-6 hover:shadow-lg hover:border-purple-300 transition-all">
                   <Code className="text-purple-600 mx-auto mb-3" size={32} />
                   <span className="bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent font-medium">{skill}</span>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-gradient-to-br from-purple-50 to-white border border-purple-200 rounded-xl p-6 shadow-sm">
+          </motion.div>
+          <motion.div
+            className="grid md:grid-cols-2 gap-8"
+            variants={{
+              hidden: {},
+              show: {
+                transition: { staggerChildren: 0.15 }
+              }
+            }}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+          >
+            <motion.div
+              className="bg-gradient-to-br from-purple-50 to-white border border-purple-200 rounded-xl p-6 shadow-sm"
+              variants={{ hidden: { opacity: 0, y: 30 }, show: { opacity: 1, y: 0 } }}
+              transition={{ duration: 0.5 }}
+            >
               <div className="flex items-center gap-3 mb-6">
                 <Terminal className="text-purple-600" size={24} />
                 <h3 className="text-xl font-semibold bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">Development Tools</h3>
@@ -279,9 +330,12 @@ const Portfolio = () => {
                   </span>
                 ))}
               </div>
-            </div>
-
-            <div className="bg-gradient-to-br from-purple-50 to-white border border-purple-200 rounded-xl p-6 shadow-sm">
+            </motion.div>
+            <motion.div
+              className="bg-gradient-to-br from-purple-50 to-white border border-purple-200 rounded-xl p-6 shadow-sm"
+              variants={{ hidden: { opacity: 0, y: 30 }, show: { opacity: 1, y: 0 } }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+            >
               <div className="flex items-center gap-3 mb-6">
                 <Code className="text-purple-600" size={24} />
                 <h3 className="text-xl font-semibold bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">Other Skills</h3>
@@ -296,8 +350,8 @@ const Portfolio = () => {
                   </span>
                 ))}
               </div>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
@@ -307,10 +361,25 @@ const Portfolio = () => {
           <h2 className="text-3xl lg:text-4xl font-bold text-center mb-16">
             <span className="bg-gradient-to-r from-purple-600 to-purple-800 bg-clip-text text-transparent">My Education</span>
           </h2>
-          
-          <div className="space-y-8">
+          <motion.div
+            className="space-y-8"
+            variants={{
+              hidden: {},
+              show: {
+                transition: { staggerChildren: 0.18 }
+              }
+            }}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+          >
             {portfolioData.education.map((edu, index) => (
-              <div key={index} className="bg-white border border-gray-200 rounded-xl p-6 flex gap-6 shadow-sm hover:shadow-lg transition-shadow">
+              <motion.div
+                key={index}
+                className="bg-white border border-gray-200 rounded-xl p-6 flex gap-6 shadow-sm hover:shadow-lg transition-shadow"
+                variants={{ hidden: { opacity: 0, y: 40 }, show: { opacity: 1, y: 0 } }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+              >
                 <div className="flex-shrink-0">
                   <div className="bg-purple-100 p-3 rounded-lg border border-purple-200">
                     <GraduationCap className="text-purple-600" size={24} />
@@ -325,9 +394,9 @@ const Portfolio = () => {
                   <p className="text-purple-700 font-medium mb-2">{edu.degree}</p>
                   <p className="text-gray-600">{edu.description}</p>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -337,10 +406,9 @@ const Portfolio = () => {
           <h2 className="text-3xl lg:text-4xl font-bold text-center mb-16">
             <span className="bg-gradient-to-r from-purple-600 to-purple-800 bg-clip-text text-transparent">Tech Interests</span>
           </h2>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+          <div className="flex flex-row overflow-x-auto gap-x-6 mb-12 hide-scrollbar">
             {portfolioData.interests.map((interest, index) => (
-              <div key={index} className="bg-gradient-to-br from-purple-50 to-white border border-purple-200 rounded-xl p-6 text-center hover:shadow-lg hover:border-purple-300 transition-all">
+              <div key={index} className="bg-gradient-to-br from-purple-50 to-white border border-purple-200 rounded-xl p-6 text-center hover:shadow-lg hover:border-purple-300 transition-all min-w-[260px] max-w-[260px] flex-shrink-0">
                 <div className="bg-purple-100 p-4 rounded-lg inline-block mb-4 border border-purple-200">
                   {index === 0 && <Code className="text-purple-600" size={32} />}
                   {index === 1 && <Database className="text-purple-600" size={32} />}
@@ -352,7 +420,6 @@ const Portfolio = () => {
               </div>
             ))}
           </div>
-
           <div className="bg-gradient-to-br from-purple-50 to-white border border-purple-200 rounded-xl p-8 text-center shadow-sm">
             <h3 className="text-2xl font-semibold bg-gradient-to-r from-purple-600 to-purple-800 bg-clip-text text-transparent mb-4">Always Learning & Exploring</h3>
             <p className="text-gray-600 max-w-3xl mx-auto">
@@ -375,30 +442,31 @@ const Portfolio = () => {
           
           <div className="flex justify-center gap-6 mb-12">
             {portfolioData.social.map((social, index) => (
-              <a
+              <motion.div
                 key={index}
-                href={social.url}
-                target="_blank"
-                rel="noopener noreferrer"
                 className="bg-white border border-gray-200 p-4 rounded-lg hover:shadow-lg hover:border-purple-300 transition-all"
               >
                 {social.platform === 'LinkedIn' && <Code className="text-purple-600" size={24} />}
                 {social.platform === 'Twitter' && <Code className="text-purple-600" size={24} />}
                 {social.platform === 'GitHub' && <Github className="text-purple-600" size={24} />}
                 {social.platform === 'Email' && <Mail className="text-purple-600" size={24} />}
-              </a>
+              </motion.div>
             ))}
           </div>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
+            <motion.a
+              whileHover={{ scale: 1.07, boxShadow: '0 8px 32px rgba(128,0,128,0.15)' }}
+              whileTap={{ scale: 0.97 }}
               href={`mailto:${portfolioData.personal.email}`}
               className="bg-gradient-to-r from-purple-600 to-purple-800 hover:from-purple-700 hover:to-purple-900 text-white px-8 py-3 rounded-lg font-medium transition-all flex items-center gap-2 justify-center shadow-lg"
             >
               <Mail size={18} />
               <span>{portfolioData.personal.email}</span>
-            </a>
-            <a
+            </motion.a>
+            <motion.a
+              whileHover={{ scale: 1.07, boxShadow: '0 8px 32px rgba(128,0,128,0.15)' }}
+              whileTap={{ scale: 0.97 }}
               href={portfolioData.personal.cvUrl}
               target="_blank"
               rel="noopener noreferrer"
@@ -406,9 +474,30 @@ const Portfolio = () => {
             >
               <Download size={18} />
               <span>Download CV</span>
-            </a>
+            </motion.a>
           </div>
-          
+
+          {/* Review Form */}
+          <motion.div
+            className="mt-16 max-w-xl mx-auto bg-white rounded-xl shadow-lg p-8 border border-purple-100"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h3 className="text-2xl font-bold mb-4 bg-gradient-to-r from-purple-600 to-purple-800 bg-clip-text text-transparent">Leave a Review</h3>
+            <ReviewForm />
+          </motion.div>
+
+          {/* Reviews List */}
+          <motion.div
+            className="mt-10 max-w-xl mx-auto"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <ReviewsList />
+          </motion.div>
+
           <div className="mt-16 pt-8 border-t border-gray-200">
             <p className="text-gray-500">
               &copy; {new Date().getFullYear()} Keren Hapuch. All rights reserved.
@@ -416,6 +505,120 @@ const Portfolio = () => {
           </div>
         </div>
       </section>
+    </div>
+  );
+};
+
+const ReviewForm = () => {
+  const [name, setName] = React.useState('');
+  const [review, setReview] = React.useState('');
+  const [rating, setRating] = React.useState(0);
+  const [hoverRating, setHoverRating] = React.useState(0);
+  const [reviews, setReviews] = React.useState(() => {
+    // Persist reviews in localStorage
+    const saved = localStorage.getItem('portfolio_reviews');
+    return saved ? JSON.parse(saved) : [];
+  });
+  const [submitted, setSubmitted] = React.useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!name || !review || rating === 0) return;
+    const newReview = { name, review, rating, date: new Date().toISOString() };
+    const updated = [newReview, ...reviews];
+    setReviews(updated);
+    localStorage.setItem('portfolio_reviews', JSON.stringify(updated));
+    setName('');
+    setReview('');
+    setRating(0);
+    setHoverRating(0);
+    setSubmitted(true);
+    setTimeout(() => setSubmitted(false), 2000);
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+      <input
+        type="text"
+        placeholder="Your Name"
+        className="border border-purple-200 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-400"
+        value={name}
+        onChange={e => setName(e.target.value)}
+        required
+      />
+      <textarea
+        placeholder="Your Review"
+        className="border border-purple-200 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-400"
+        value={review}
+        onChange={e => setReview(e.target.value)}
+        required
+      />
+      <div className="flex items-center gap-2">
+        {[1,2,3,4,5].map(star => (
+          <Star
+            key={star}
+            size={24}
+            className={`cursor-pointer ${star <= (hoverRating || rating) ? 'text-yellow-400' : 'text-gray-300'}`}
+            onMouseEnter={() => setHoverRating(star)}
+            onMouseLeave={() => setHoverRating(0)}
+            onClick={() => setRating(star)}
+            fill={star <= (hoverRating || rating) ? '#facc15' : 'none'}
+          />
+        ))}
+        <span className="text-sm text-gray-500 ml-2">{rating ? `${rating}/5` : ''}</span>
+      </div>
+      <motion.button
+        whileHover={{ scale: 1.05, backgroundColor: '#a21caf', color: '#fff' }}
+        whileTap={{ scale: 0.97 }}
+        type="submit"
+        className="bg-gradient-to-r from-purple-600 to-purple-800 text-white px-6 py-2 rounded-lg font-semibold shadow-md transition-all"
+      >
+        Submit Review
+      </motion.button>
+      {submitted && <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-green-600 font-medium">Thank you for your review!</motion.div>}
+    </form>
+  );
+};
+
+const ReviewsList = () => {
+  const [reviews, setReviews] = React.useState(() => {
+    const saved = localStorage.getItem('portfolio_reviews');
+    return saved ? JSON.parse(saved) : [];
+  });
+
+  React.useEffect(() => {
+    const handler = () => {
+      const saved = localStorage.getItem('portfolio_reviews');
+      setReviews(saved ? JSON.parse(saved) : []);
+    };
+    window.addEventListener('storage', handler);
+    return () => window.removeEventListener('storage', handler);
+  }, []);
+
+  if (!reviews.length) return <p className="text-gray-400">No reviews yet. Be the first!</p>;
+
+  return (
+    <div className="flex flex-row overflow-x-auto gap-x-6 hide-scrollbar">
+      {reviews.map((r, i) => (
+        <motion.div
+          key={i}
+          className="bg-white border border-purple-100 rounded-lg p-4 shadow-sm text-left min-w-[320px] max-w-[320px] flex-shrink-0"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: i * 0.08 }}
+        >
+          <div className="flex items-center gap-2 mb-1">
+            <span className="font-semibold text-purple-700">{r.name}</span>
+            <span className="flex gap-1">
+              {[1,2,3,4,5].map(star => (
+                <Star key={star} size={16} className={star <= r.rating ? 'text-yellow-400' : 'text-gray-200'} fill={star <= r.rating ? '#facc15' : 'none'} />
+              ))}
+            </span>
+            <span className="text-xs text-gray-400 ml-2">{new Date(r.date).toLocaleDateString()}</span>
+          </div>
+          <p className="text-gray-700">{r.review}</p>
+        </motion.div>
+      ))}
     </div>
   );
 };
