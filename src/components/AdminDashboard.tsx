@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { getPortfolioData, updatePortfolioData } from '../utils/portfolioData';
 import AdminHeader from './AdminHeader';
@@ -7,6 +8,7 @@ import ProjectsManager from './ProjectsManager';
 import SkillsManager from './SkillsManager';
 import EducationManager from './EducationManager';
 import InterestsManager from './InterestsManager';
+import CertificationsManager from './CertificationsManager';
 
 interface AdminDashboardProps {
   onLogout: () => void;
@@ -97,7 +99,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white">
       <AdminHeader onSave={handleSave} onLogout={onLogout} />
 
       <div className="max-w-7xl mx-auto p-6">
@@ -107,6 +109,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => {
             <TabsTrigger value="projects" className="data-[state=active]:bg-purple-600">Projects</TabsTrigger>
             <TabsTrigger value="skills" className="data-[state=active]:bg-purple-600">Skills</TabsTrigger>
             <TabsTrigger value="education" className="data-[state=active]:bg-purple-600">Education</TabsTrigger>
+            <TabsTrigger value="certifications" className="data-[state=active]:bg-purple-600">Certifications</TabsTrigger>
             <TabsTrigger value="interests" className="data-[state=active]:bg-purple-600">Interests</TabsTrigger>
           </TabsList>
 
@@ -142,6 +145,10 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => {
             />
           </TabsContent>
 
+          <TabsContent value="certifications">
+            <CertificationsManager />
+          </TabsContent>
+
           <TabsContent value="interests">
             <InterestsManager
               interests={portfolioData.interests}
@@ -155,3 +162,4 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => {
 };
 
 export default AdminDashboard;
+// CertificationsManager extracted to its own file: ./CertificationsManager

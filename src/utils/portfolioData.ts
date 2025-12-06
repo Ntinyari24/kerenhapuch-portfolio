@@ -20,6 +20,21 @@ interface Interest {
   description: string;
 }
 
+interface Certification {
+  title: string;
+  issuer: string;
+  date: string;
+  description?: string;
+  imageUrl?: string;
+  credentialUrl?: string;
+}
+
+interface Badge {
+  title: string;
+  imageUrl?: string;
+  description?: string;
+}
+
 interface Social {
   platform: string;
   url: string;
@@ -38,6 +53,8 @@ interface PortfolioData {
     tools: string[];
     other: string[];
   };
+  certifications?: Certification[];
+  badges?: Badge[];
   education: Education[];
   interests: Interest[];
   social: Social[];
@@ -68,31 +85,31 @@ const defaultPortfolioData: PortfolioData = {
       imageUrl: "https://res.cloudinary.com/dozb1abfn/image/upload/jnbxwwljgojsk96tkx3h.jpg"
     },
     {
-      title: "ZOEZI_WEBSITE",
-      description: "ZOEZI_WEBSITE is a modern, clean, and user-friendly fitness website that highlights health and wellness content. It includes JavaScript-driven animations to enhance user engagement and implements Google OAuth login to enable users to securely sign in",
-      tags: ["HTML", "Bootstrap", "CSS", "JavaScript"],
-      githubUrl: "https://zoezi-website.vercel.app/",
-      imageUrl: "https://res.cloudinary.com/dozb1abfn/image/upload/zoezi_web_ptrtao.png"
+      title: " BIJOU WEBSITE",
+      description: "BijouShop is a full-stack e-commerce platform built with a modern frontend (React / Vite) integrated with a Django REST backend. It supports user authentication, product browsing, filtering, shopping cart, reviews, and admin product management. ",
+      tags: ["React", "Django", "REST API", "Full-Stack Development"],
+      githubUrl: "https://bijoushop-frontend.onrender.com/",
+      imageUrl: "https://res.cloudinary.com/dozb1abfn/image/upload/v1758364825/Screenshot_20-9-2025_104210_localhost_s41rpv.jpg"
     },
     {
-      title: "COVID-19 Analysis",
-      description: "This project presents a comprehensive analysis and visualization of the global COVID-19 pandemic using real-time data. It explores the spread of the virus, comparisons between countries, and trends over time through interactive and static visualizations.",
-      tags: ["Python", "Pandas", "Matplotlib & Seaborn", "Jupyter Notebook", "Plotly & Folium"],
-      githubUrl: "https://github.com/Ntinyari24/COVID-19-analysis.git",
-      imageUrl: "https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?w=500&h=300&fit=crop"
+      title: "DATA ANALYSIS",
+      description: "This project presents a comprehensive analysis and visualization of sales and marketing data. ",
+      tags: ["Python", "Pandas", "Matplotlib & Seaborn", "Jupyter Notebook", "PowerBI"],
+      githubUrl: "https://github.com/Ntinyari24/FUTURE_DS_02",
+      imageUrl: "https://res.cloudinary.com/dozb1abfn/image/upload/v1764942337/MARKETING_2.PBIX_pkixu7.png"
     }
   ],
   skills: {
-    languages: ["HTML5", "Python", "JavaScript", "Java", "PHP", "C/C++"],
-    tools: ["Git", "Visual Studio Code", "PyCharm", "Jupyter", "Docker", "Flask", "APIs"],
-    other: ["Problem Solving", "Data Structures & Algorithms", "Database Management", "API Integration", "Web Development"]
+    languages: ["HTML5", "Python", "JavaScript", "Java", "PHP", "PowerBI"],
+    tools: ["Git", "Visual Studio Code", "PyCharm", "Jupyter", "Docker", "Excel", "PowerBI", "ZOHO Creator"],
+    other: ["Problem Solving", "Data Structures & Algorithms", "Database Management", "API Integration", "Web Development", "Data analysis", "AI", ]
   },
   education: [
     {
       institution: "Jomo Kenyatta University of Agriculture And Technology",
       degree: "Bachelor's in Mining and Mineral Processing Engineering",
       period: "2022 - Present",
-      description: "Skilled in Engineering Softwares CAD drawing, Inventor, SolidWorks and MATLAB."
+      description: "Skilled in Engineering Mathematical Concepts and Softwares including CAD drawing, Inventor, SolidWorks and MATLAB."
     },
     {
       institution: "PLP ACADEMY - COHORT VII",
@@ -122,19 +139,58 @@ const defaultPortfolioData: PortfolioData = {
       description: "Building projects using HTML, CSS, JavaScript, and frameworks such as Django, Flask, and React."
     },
     {
-      title: "DATA ANALYSIS",
+      title: "DATA SCIENCE & ANALYSIS",
       description: "Proficient in using automation tools and libraries such as Selenium, Pandas, and Power Automate to streamline workflows and extract actionable insights from data."
     },
     {
       title: "ARTIFICIAL INTELLIGENCE",
       description: "Skilled in developing AI models using Python, TensorFlow, and scikit-learn for classification, regression, and clustering tasks."
     },
-    {
-      title: "TECH FOR WOMEN",
-      description: "Exploring tech-driven solutions to solve health issues in women's lives."
-    }
+    
   ],
-  social: [
+  certifications: [
+  {
+  
+    "title": "AI FOR SOFTWARE ENGINEERING",
+    "issuer": "POWER LEARN PROJECT",
+    "date": "Dec 2025",
+    "description": "An introductory course covering Python fundamentals, dabase management, Startup building and software development.",
+    "imageUrl": "https://res.cloudinary.com/dozb1abfn/image/upload/v1765049850/plp_certificate_jeetpj.png",
+    "credentialUrl": "https://res.cloudinary.com/dozb1abfn/image/upload/v1765049850/plp_certificate_jeetpj.png"
+  },
+  {
+    
+    "title": "NASA HACKATHON 2025",
+    "issuer": "NASA",
+    "date": "October 2025",
+    "description": "Course on best practices and evaluation methods for large language models.",
+    "imageUrl": "https://res.cloudinary.com/dozb1abfn/image/upload/v1764942221/NASA_CERTIFICATE_peecze.jpg",
+    "credentialUrl": "https://res.cloudinary.com/dozb1abfn/image/upload/v1764942221/NASA_CERTIFICATE_peecze.jpg"
+  },
+
+
+   {
+    
+    "title": "CODE.X_JKUAT_JHUB AFRICA",
+    "issuer": "CODE.X",
+    "date": "SEPTEMBER 2025",
+    "description": "Participation in the 8-Day local intelligence program covering various topics.",
+    "imageUrl": "https://res.cloudinary.com/dozb1abfn/image/upload/v1765027354/CODEX_JHUB_CERTIFICATE_ndnrug.jpg",
+    "credentialUrl": "https://res.cloudinary.com/dozb1abfn/image/upload/v1765027354/CODEX_JHUB_CERTIFICATE_ndnrug.jpg"
+   },
+
+    {
+    
+    "title": "Zoho Creator",
+    "issuer": "ZOHO",
+    "date": "SEPTEMBER 2025",
+    "description": "Training completion Certificate for Young Creators Program by ZOHO Corporation.",
+    "imageUrl": "https://res.cloudinary.com/dozb1abfn/image/upload/v1765027376/ZOHO_CREATOR_CERTIFICATE_ezjwfo.jpg",
+    "credentialUrl": "https://res.cloudinary.com/dozb1abfn/image/upload/v1765027376/ZOHO_CREATOR_CERTIFICATE_ezjwfo.jpg"
+   }
+],
+  
+ social: [
     {
       platform: "LinkedIn",
       url: "https://www.linkedin.com/in/keren-hapuch-2311242b0"
@@ -170,4 +226,4 @@ export const updatePortfolioData = (data: PortfolioData): void => {
   localStorage.setItem('portfolioData', JSON.stringify(data));
 };
 
-export type { PortfolioData, Project, Education, Interest, Social };
+export type { PortfolioData, Project, Education, Interest, Certification, Social };

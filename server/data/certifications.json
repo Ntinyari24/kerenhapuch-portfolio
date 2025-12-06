@@ -1,0 +1,41 @@
+[
+  {
+    "id": "cert-1",
+    "title": "AI FOR SOFTWARE ENGINEERING",
+    "issuer": "POWER LEARN PROJECT",
+    "date": "Dec 2025",
+    "description": "An introductory course covering Python fundamentals, dabase management, Startup building and software development.",
+    "imageUrl": "KEREN_HAPUCH_PLP_CERTIFICATE_uxpkeu",
+    "credentialUrl": "KEREN_HAPUCH_PLP_CERTIFICATE_uxpkeu"
+  },
+  {
+    "id": "cert-2",
+    "title": "NASA HACKATHON 2025",
+    "issuer": "NASA",
+    "date": "October 2025",
+    "description": "Course on best practices and evaluation methods for large language models.",
+    "imageUrl": "https://res.cloudinary.com/dozb1abfn/image/upload/v1764942221/NASA_CERTIFICATE_peecze.jpg",
+    "credentialUrl": "https://res.cloudinary.com/dozb1abfn/image/upload/v1764942221/NASA_CERTIFICATE_peecze.jpg"
+  },
+
+
+   {
+    "id": "cert-3",
+    "title": "CODE.X_JKUAT_JHUB AFRICA",
+    "issuer": "CODE.X",
+    "date": "SEPTEMBER 2025",
+    "description": "Participation in the 8-Day local intelligence program covering various topics.",
+    "imageUrl": "https://res.cloudinary.com/dozb1abfn/image/upload/v1765027354/CODEX_JHUB_CERTIFICATE_ndnrug.jpg",
+    "credentialUrl": "https://res.cloudinary.com/dozb1abfn/image/upload/v1765027354/CODEX_JHUB_CERTIFICATE_ndnrug.jpg"
+   },
+
+    {
+    "id": "cert-4",
+    "title": "Zoho Creator",
+    "issuer": "ZOHO",
+    "date": "SEPTEMBER 2025",
+    "description": "Training completion Certificate for Young Creators Program by ZOHO Corporation.",
+    "imageUrl": "https://res.cloudinary.com/dozb1abfn/image/upload/v1765027376/ZOHO_CREATOR_CERTIFICATE_ezjwfo.jpg",
+    "credentialUrl": "https://res.cloudinary.com/dozb1abfn/image/upload/v1765027376/ZOHO_CREATOR_CERTIFICATE_ezjwfo.jpg"
+   }
+]

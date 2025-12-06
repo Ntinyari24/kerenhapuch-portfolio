@@ -23,11 +23,12 @@ const Portfolio = () => {
   const [activeSection, setActiveSection] = useState('home');
   const [portfolioData, setPortfolioData] = useState(getPortfolioData());
   const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(false);
+  const [certs, setCerts] = useState<any[]>(getPortfolioData().certifications || []);
 
   useEffect(() => {
     setIsAdminAuthenticated(localStorage.getItem('admin_authenticated') === 'true');
     const handleScroll = () => {
-      const sections = ['home', 'projects', 'skills', 'education', 'interests', 'contact'];
+  const sections = ['home', 'projects', 'skills', 'education', 'certifications', 'interests', 'contact'];
       const currentSection = sections.find(section => {
         const element = document.getElementById(section);
         if (element) {
@@ -43,6 +44,35 @@ const Portfolio = () => {
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Fetch certifications from backend, fallback to local portfolioData
+  useEffect(() => {
+    let mounted = true;
+    (async () => {
+      try {
+  const res = await fetch(`${import.meta.env.VITE_API_BASE || 'http://localhost:4000'}/api/certifications`);
+        if (!res.ok) throw new Error('No backend');
+        const data = await res.json();
+        if (mounted && Array.isArray(data) && data.length) setCerts(data);
+      } catch (err) {
+        // keep local data
+      }
+    })();
+    const handler = (e: StorageEvent) => {
+      if (e.key === 'portfolio_certs') {
+        (async () => {
+            try {
+            const res = await fetch(`${import.meta.env.VITE_API_BASE || 'http://localhost:4000'}/api/certifications`);
+            if (!res.ok) return;
+            const data = await res.json();
+            if (Array.isArray(data)) setCerts(data);
+          } catch (err) { }
+        })();
+      }
+    };
+    window.addEventListener('storage', handler);
+    return () => { mounted = false; window.removeEventListener('storage', handler); };
   }, []);
 
   const scrollToSection = (sectionId: string) => {
@@ -73,7 +103,7 @@ const Portfolio = () => {
             
             {/* Desktop Navigation */}
             <div className="hidden md:flex space-x-8">
-              {['Home', 'Projects', 'Skills', 'Education', 'Interests', 'Contact'].map((item) => (
+              {['Home', 'Projects', 'Skills', 'Education', 'Certifications', 'Interests', 'Contact'].map((item) => (
                 <button
                   key={item}
                   onClick={() => scrollToSection(item.toLowerCase())}
@@ -98,9 +128,9 @@ const Portfolio = () => {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden bg-slate-900/95 backdrop-blur-md border-t border-gray-700 shadow-lg">
+            <div className="md:hidden bg-slate-900/95 backdrop-blur-md border-t border-gray-700 shadow-lg">
             <div className="px-4 py-4 space-y-3">
-              {['Home', 'Projects', 'Skills', 'Education', 'Interests', 'Contact'].map((item) => (
+              {['Home', 'Projects', 'Skills', 'Education', 'Certifications', 'Interests', 'Contact'].map((item) => (
                 <button
                   key={item}
                   onClick={() => scrollToSection(item.toLowerCase())}
@@ -264,6 +294,8 @@ const Portfolio = () => {
         </div>
       </section>
 
+      
+
       {/* Skills Section */}
       <section id="skills" className="py-20 px-4 bg-slate-950">
         <div className="max-w-7xl mx-auto">
@@ -397,6 +429,66 @@ const Portfolio = () => {
               </motion.div>
             ))}
           </motion.div>
+        </div>
+      </section>
+
+      {/* Certifications Section */}
+      <section id="certifications" className="py-20 px-4 bg-slate-950">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-3xl lg:text-4xl font-bold text-center mb-16">
+            <span className="bg-gradient-to-r from-purple-500 to-purple-700 bg-clip-text text-transparent">Certifications & Badges</span>
+          </h2>
+
+          <div className="grid md:grid-cols-2 gap-8 mb-12">
+            {certs && certs.map((cert: any, index: number) => (
+              <motion.div
+                key={index}
+                className="bg-slate-800 border border-gray-700 rounded-xl p-6 flex gap-6 shadow-sm hover:shadow-lg transition-shadow"
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: index * 0.08 }}
+              >
+                <div className="flex-shrink-0">
+                  <div className="bg-purple-900/30 p-3 rounded-lg border border-purple-700 w-20 h-20 flex items-center justify-center overflow-hidden">
+                    {cert.imageUrl ? (
+                      <img src={cert.imageUrl} alt={cert.title} className="w-full h-full object-contain" />
+                    ) : (
+                      <BookOpen className="text-purple-400" size={28} />
+                    )}
+                  </div>
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold bg-gradient-to-r from-gray-100 to-gray-300 bg-clip-text text-transparent mb-2">{cert.title}</h3>
+                  <div className="flex items-center gap-2 text-purple-400 mb-2">
+                    <Calendar size={16} />
+                    <span>{cert.issuer} • {cert.date}</span>
+                  </div>
+                  {cert.description && <p className="text-gray-300 mb-2">{cert.description}</p>}
+                  {cert.credentialUrl && (
+                    <a href={cert.credentialUrl} target="_blank" rel="noopener noreferrer" className="text-purple-300 underline">View Credential</a>
+                  )}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          {portfolioData.badges && (
+            <div>
+              <h3 className="text-2xl font-semibold mb-6 bg-gradient-to-r from-gray-100 to-gray-300 bg-clip-text text-transparent">Badges</h3>
+              <div className="flex flex-row gap-6 overflow-x-auto hide-scrollbar pb-4">
+                {portfolioData.badges.map((badge: any, i: number) => (
+                  <div key={i} className="bg-gradient-to-br from-slate-900 to-slate-800 border border-purple-700 rounded-xl p-6 text-center min-w-[220px] flex-shrink-0">
+                    <div className="w-24 h-24 mx-auto mb-4">
+                      {badge.imageUrl ? <img src={badge.imageUrl} alt={badge.title} className="w-full h-full object-contain" /> : <Star className="text-purple-400" size={36} />}
+                    </div>
+                    <h4 className="text-lg font-medium bg-gradient-to-r from-gray-100 to-gray-300 bg-clip-text text-transparent mb-2">{badge.title}</h4>
+                    {badge.description && <p className="text-gray-300 text-sm">{badge.description}</p>}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </section>
 
@@ -627,5 +719,7 @@ const ReviewsList = () => {
     </div>
   );
 };
+
+
 
 export default Portfolio;
