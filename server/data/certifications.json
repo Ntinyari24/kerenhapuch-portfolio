@@ -5,15 +5,15 @@
     "issuer": "POWER LEARN PROJECT",
     "date": "Dec 2025",
     "description": "An introductory course covering Python fundamentals, dabase management, Startup building and software development.",
-    "imageUrl": "KEREN_HAPUCH_PLP_CERTIFICATE_uxpkeu",
-    "credentialUrl": "KEREN_HAPUCH_PLP_CERTIFICATE_uxpkeu"
+    "imageUrl": "https://res.cloudinary.com/dozb1abfn/image/upload/v1769677421/plp_certificate_c1qc9b.png",
+    "credentialUrl": "https://res.cloudinary.com/dozb1abfn/image/upload/v1769677421/plp_certificate_c1qc9b.png"
   },
   {
     "id": "cert-2",
     "title": "NASA HACKATHON 2025",
     "issuer": "NASA",
     "date": "October 2025",
-    "description": "Course on best practices and evaluation methods for large language models.",
+    "description": "We used NASA MODIS (Land Surface Temperature for urban heat islands), Sentinel-5P TROPOMI (air pollutants like NO₂), Landsat/Sentinel-2 (NDVI and land cover for greenspace analysis), and gridded population data to build an interactive dashboard that maps pollution hotspots, heat-vulnerable areas, and greenspace inequities in fast-growing cities.",
     "imageUrl": "https://res.cloudinary.com/dozb1abfn/image/upload/v1764942221/NASA_CERTIFICATE_peecze.jpg",
     "credentialUrl": "https://res.cloudinary.com/dozb1abfn/image/upload/v1764942221/NASA_CERTIFICATE_peecze.jpg"
   },

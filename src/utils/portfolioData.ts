@@ -154,7 +154,7 @@ const defaultPortfolioData: PortfolioData = {
     "title": "AI FOR SOFTWARE ENGINEERING",
     "issuer": "POWER LEARN PROJECT",
     "date": "Dec 2025",
-    "description": "An introductory course covering Python fundamentals, dabase management, Startup building and software development.",
+    "description": "An introductory course covering Python fundamentals, database management, Startup building and software development.",
     "imageUrl": "https://res.cloudinary.com/dozb1abfn/image/upload/v1765049850/plp_certificate_jeetpj.png",
     "credentialUrl": "https://res.cloudinary.com/dozb1abfn/image/upload/v1765049850/plp_certificate_jeetpj.png"
   },
