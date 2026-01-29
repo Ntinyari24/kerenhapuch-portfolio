@@ -78,32 +78,6 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => {
     setPortfolioData({ ...portfolioData, education: updatedEducation });
   };
 
-
-
-  const addCertification = () => {
-    const newEducation = {
-      institution: 'New Institution',
-      degree: 'New Degree',
-      period: '2024 - Present',
-      description: 'Education description',
-    };
-    setPortfolioData({
-      ...portfolioData,
-      education: [...portfolioData.education, newEducation],
-    });
-  };
-
-  const updateEducation = (index: number, field: string, value: string) => {
-    const updatedEducation = [...portfolioData.education];
-    updatedEducation[index] = { ...updatedEducation[index], [field]: value };
-    setPortfolioData({ ...portfolioData, education: updatedEducation });
-  };
-
-  const deleteEducation = (index: number) => {
-    const updatedEducation = portfolioData.education.filter((_, i) => i !== index);
-    setPortfolioData({ ...portfolioData, education: updatedEducation });
-  };
-
   const updatePersonalInfo = (field: string, value: string) => {
     setPortfolioData({
       ...portfolioData,
